@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 
-connect("mongodb://localhost:27017/messages", { useNewUrlParser: true });
+connect("mongodb://chat2:chat2chat2@ds251507.mlab.com:51507/heroku_rbc41613", { useNewUrlParser: true });
 set('useFindAndModify', false);
 
 
