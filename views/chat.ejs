@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="login-page">
+                <% if(error) { %>
+                <div class="form">
+                    <div>
+                        <form class="register" method="post" style="display: none;" id="formRegister">
+                            <input type="text" name="email" placeholder="email"/>
+                            <input type="text" name="username" placeholder="username"/>
+                            <input type="password" name="password" placeholder="password"/>
+                            <button type="submit" id="register" class="register">create</button>
+                            <p id="registerError"> </p>
+                            <p class="message">Already registered? <a href="" id="signIn">Sign In</a></p>
+                        </form>
+                        <form class="login" method="post" id="formLogin">
+                            <input type="text" name="username" placeholder="username"/>
+                            <input type="password" name="password" placeholder="password"/>
+                            <button type="submit" id="login" class="login">login</button>
+                            <p id="loginError"> </p>
+                            <p class="message">Not registered? <a href="" id="create">Create an account</a></p>
+                        </form>
+                    </div>
+                </div>
+                <script src="/assets/js/unauth.js"></script>
+                <% } else {%>
+                    <div>
+                        <h1>Hello, <span><%= username %> </span></h1>
+                    </div>
+                    <div class="controls">
+                        <a href="#" class="logout" id="logout">Logout</a>
+                    </div>
+                    <script src="/assets/js/auth.js"></script>
+                <% } %>
+            </div>
+            <div class="chat">
+                <ul id="messages">
+                    <% if(data.length !== 0) {
+                        for(let message of data) { %>
+                            <li>
+                                <%= message.text %>
+                            </li>
+                            <span>by  <%= message.author %>: <%= message.createdAt.toLocaleTimeString() %></span>
+                    <% }} %>
+                </ul>
+                <div class="pagination">
+                    <button class="page">
+                          <%='<' %>
+                    </button>
+                    <button class="page">
+                        <%= page - 1 %>
+                    </button>
+                    <button class="page">
+                        <%= page %>
+                    </button>
+                    <button class="page">
+                        <%= page - 0 + 1 %>
+                    </button>
+                    <button class="page">
+                        <%='>' %>
+                    </button>
+                  </div>
+            </div>
+            <script src="/assets/js/pagination.js"></script>
+
+                <div class="chat-message" id="chat-message">
+                    <textarea name="message" placeholder ="Type your message" rows="3" id="message"></textarea>
+                    <button type="submit" id="send-message">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const socket = io.connect();
+
+        socket.on('connected', function (msg) {
+            console.log(msg);
+        })
+        const chatMessage = document.getElementById("send-message");
+        chatMessage.addEventListener("click", sendMessage, false);
+
+        function sendMessage() {
+            let message = document.getElementById("message").value;
+                if(message !== '' && message.length <= 100) {
+                    
+                    socket.emit('msg', message);
+                    document.getElementById("message").value = '';
+                }
+        }
+        socket.on('message', function (msg) {
+            console.log(msg);
+            
+            let  li  =  document.createElement("li");
+            let messages = document.getElementById("messages");
+            let  span  =  document.createElement("span");
+            messages.appendChild(li).append(msg.message);
+            messages.appendChild(span)
+                    .append("by "  +  msg.author  +  ": "  +  new Date().toLocaleTimeString());
+        })
+    </script>
+</body>
+</html>
