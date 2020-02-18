@@ -4,6 +4,7 @@
   "description": "",
   "main": "runner.js",
   "scripts": {
+    "start": "node runner.js",
     "nodemon": "nodemon runner.js"
   },
   "keywords": [],
