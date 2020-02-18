@@ -5,7 +5,8 @@
   "main": "runner.js",
   "scripts": {
     "start": "node runner.js",
-    "nodemon": "nodemon runner.js"
+    "nodemon": "nodemon runner.js",
+    "test": "echo FIXME add tests"
   },
   "keywords": [],
   "author": "",
