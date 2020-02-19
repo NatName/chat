@@ -40,6 +40,7 @@ app.use(router);
 require("./middlewares/socket")(io);
 
 
-server.listen(+process.env.PORT, () => {
+
+server.listen(process.env.PORT, () => {
     console.log(`server started on port ${process.env.PORT}`);
 })

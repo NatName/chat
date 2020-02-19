@@ -12,14 +12,5 @@ module.exports = {
     secretOrKey: "TfbTq2NfLzqMcbVY9EpGQ2p"
   },
 
-  expiresIn: "1 day",
-
-  mongo: {
-    url: "mongodb://localhost:27017/",
-    options: {
-      dbName: "chatik",
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  }
+  expiresIn: "1 day"
 };

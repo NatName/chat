@@ -1,10 +1,9 @@
 import express from 'express';
 import { checkAuth } from '../middlewares/checkAuth'
-import { validateAuth, validateMessage } from '../middlewares/validator'
-const { check } = require('express-validator');
+import { validateAuth } from '../middlewares/validator'
 import {
   getMessages,
-  postMessage
+  getMessage
 } from '../controllers/messages'
 import {
   register,
@@ -14,9 +13,10 @@ import {
 const router = express.Router();
 
 router.get('/list/:page', checkAuth, getMessages);
-router.post('/list', postMessage);
+router.get('/single/:id', checkAuth, getMessage);
 
 router.post('/register', validateAuth(), register);
 router.post('/login', login);
 router.post('/logout', logout);
+
 export default router;

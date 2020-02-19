@@ -10,9 +10,9 @@ function chooseSignIn (e) {
           register = document.getElementById('formRegister');
     if(register.style.display === 'none') {    
         login.style.display = 'none';
-        register.style.display = 'block';
+        register.style.display = 'flex';
     } else {
-        login.style.display = 'block';
+        login.style.display = 'flex';
         register.style.display = 'none';
     }
     

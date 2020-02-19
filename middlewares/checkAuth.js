@@ -8,7 +8,6 @@ module.exports = {
           { session: false },
           (err, decryptToken, jwtError) => {
             if (jwtError || err) {
-                console.log("unauth");
                 req.error = err || jwtError;
             } else {
                 req.user = decryptToken;

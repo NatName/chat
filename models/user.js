@@ -14,7 +14,7 @@ let userSchema = new Schema({
 } 
 );
 
-userSchema.pre("save", next => {
+userSchema.pre("save", function(next){
   if (this.isModified("password") || this.isNew()) {
     this.password = bcrtypt.hashSync(this.password, 12);
   }

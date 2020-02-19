@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/stylesheet/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <button id="back">Back</button>
+    <div class="oneData">
+        <p class=""><%= data.text %></p>
+        <span>by  <%= data.author %>: <%= data.createdAt.toLocaleTimeString() %></span>
+    </div>
+    <script>
+        const back = document.getElementById("back");
+        back.addEventListener("click", backToList, false);
+        function backToList () {
+            window.location = '/list/0';
+        }
+    </script>
+</body>
+</html>
